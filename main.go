@@ -2,25 +2,27 @@ package main
 
 import (
 	"encoding/json"
+	"html/template"
 	"log"
 	"net/http"
+	"strconv"
 
 	"groupie/models"
-	"html/template"
-	"strconv"
 )
-
 
 func main() {
 	http.HandleFunc("/", HomeHandler)
 	http.HandleFunc("/artist", ArtistHandler)
 
+	// fichiers statiques (CSS)
 	fs := http.FileServer(http.Dir("static"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	log.Println("Serveur lancé sur http://localhost:8080")
-	http.ListenAndServe(":8080", nil)
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
+
+
 func GetArtists() ([]models.Artist, error) {
 	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
 	if err != nil {
@@ -36,6 +38,8 @@ func GetArtists() ([]models.Artist, error) {
 
 	return artists, nil
 }
+
+
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	artists, err := GetArtists()
 	if err != nil {
@@ -51,9 +55,10 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 
 	err = tmpl.Execute(w, artists)
 	if err != nil {
-		http.Error(w, "Erreur execution template", http.StatusInternalServerError)
+		http.Error(w, "Erreur affichage", http.StatusInternalServerError)
 	}
 }
+
 func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 	idStr := r.URL.Query().Get("id")
 	if idStr == "" {
@@ -66,7 +71,8 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "ID invalide", http.StatusBadRequest)
 		return
 	}
-artists, err := GetArtists()
+
+	artists, err := GetArtists()
 	if err != nil {
 		http.Error(w, "Erreur serveur", http.StatusInternalServerError)
 		return
@@ -87,11 +93,15 @@ artists, err := GetArtists()
 		http.Error(w, "Artiste introuvable", http.StatusNotFound)
 		return
 	}
+
 	tmpl, err := template.ParseFiles("templates/artist.html")
 	if err != nil {
 		http.Error(w, "Erreur template", http.StatusInternalServerError)
 		return
 	}
 
-	tmpl.Execute(w, selectedArtist)
+	err = tmpl.Execute(w, selectedArtist)
+	if err != nil {
+		http.Error(w, "Erreur affichage", http.StatusInternalServerError)
+	}
 }
