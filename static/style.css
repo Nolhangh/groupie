@@ -1,102 +1,79 @@
+/* Fond général */
 body {
+    background-color: #0a0a0a;
+    color: white;
+    font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    /* Fond noir profond avec un léger dégradé pour le relief */
-    background: linear-gradient(135deg, #121212 0%, #1a1a1a 100%);
-    color: #e0e0e0; /* Texte gris très clair pour ne pas fatiguer l'œil */
+    text-align: center;
 }
 
 h1 {
-    text-align: center;
     margin: 40px 0;
-    color: #ffffff;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    font-size: 2.5rem;
 }
 
+/* Grille principale : 4 colonnes */
 .container {
+    display: grid;
+    /* Force 4 colonnes de taille égale */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 30px;
     width: 90%;
     max-width: 1200px;
-    margin: auto;
-    /* Utilisation de grid pour que ce soit bien aligné comme sur ton image */
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 30px;
-    padding-bottom: 50px;
+    margin: 0 auto 50px auto; /* Centre le bloc entier */
 }
 
+/* Style des cartes */
 .card {
-    /* Fond gris anthracite pour détacher les cartes du fond noir */
-    background: #1e1e1e; 
+    background: #161616;
     border-radius: 12px;
     padding: 20px;
-    text-align: center;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-    border: 1px solid #333; /* Bordure discrète */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centre le contenu de la carte */
+    transition: transform 0.3s ease;
 }
 
 .card:hover {
     transform: translateY(-5px);
-    /* Lueur subtile au survol */
-    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
-    border-color: #0077cc; 
-}
-
-.card h2 {
-    color: #fff;
-    margin-bottom: 15px;
-    font-size: 1.4rem;
+    border-color: #0077cc;
 }
 
 .card img {
+    width: 100%;
+    max-width: 200px;
     border-radius: 8px;
-    filter: grayscale(20%); /* Effet stylisé */
-    transition: filter 0.3s;
-    max-width: 100%;
-    height: auto;
+    margin-bottom: 15px;
 }
 
-.card:hover img {
-    filter: grayscale(0%);
+.card h2 {
+    font-size: 1.2rem;
+    margin: 10px 0;
 }
 
-a {
-    display: inline-block;
-    margin-top: 20px;
-    text-decoration: none;
-    color: white;
+.card-info {
+    font-size: 0.85rem;
+    color: #b3b3b3;
+    margin-bottom: 15px;
+}
+
+/* Bouton stylisé */
+.btn {
     background-color: #0077cc;
+    color: white;
+    text-decoration: none;
     padding: 10px 20px;
     border-radius: 6px;
     font-weight: bold;
-    transition: background 0.3s;
+    width: 80%;
 }
 
-a:hover {
-    background-color: #0099ff;
-    box-shadow: 0 0 10px rgba(0, 119, 204, 0.5);
+/* Responsive : passe à 2 colonnes sur tablette et 1 sur mobile */
+@media (max-width: 1024px) {
+    .container { grid-template-columns: repeat(2, 1fr); }
 }
 
-.image-link {
-    display: block;
-    background: none;
-    padding: 0;
-    margin-bottom: 10px;
-    border: none;
-}
-
-.image-link:hover img {
-    transform: scale(1.05);
-    border-color: #0077cc;
-    transition: all 0.3s ease;
-}
-
-.artist-thumb {
-    width: 200px;
-    height: auto;
-    border-radius: 8px;
-    border: 2px solid #333;
+@media (max-width: 600px) {
+    .container { grid-template-columns: 1fr; }
 }

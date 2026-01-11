@@ -10,30 +10,24 @@
 <body>
 
     <header>
-        <h1>Groupie Tracker</h1>
-    </header>
+    <h1>Groupie Tracker</h1>
+</header>
 
-    <main class="container">
-        {{ range . }}
-            <article class="card">
-                <a href="/artist?id={{ .ID }}" class="image-container">
-                    <img src="{{ .Image }}" alt="{{ .Name }}">
-                    <div class="overlay">
-                        <span>Voir la Bio</span>
-                    </div>
-                </a>
-
-                <div class="card-content">
-                    <h2>{{ .Name }}</h2>
-                    <div class="meta">
-                        <span class="tag">Depuis {{ .CreationDate }}</span>
-                        <span class="tag">1er Album: {{ .FirstAlbum }}</span>
-                    </div>
-                    <a href="/artist?id={{ .ID }}" class="btn-details">Concerts & Détails</a>
-                </div>
-            </article>
-        {{ end }}
-    </main>
+<div class="container">
+    {{ range . }}
+        <div class="card">
+            <h2>{{ .Name }}</h2>
+            <div class="image-wrapper">
+                <img src="{{ .Image }}" alt="{{ .Name }}">
+            </div>
+            <div class="card-info">
+                <p>Depuis {{ .CreationDate }}</p>
+                <p>1er Album: {{ .FirstAlbum }}</p>
+            </div>
+            <a href="/artist?id={{ .ID }}" class="btn">Voir l'artiste</a>
+        </div>
+    {{ end }}
+</div>
 
     <footer>
         <p>&copy; 2026 Groupie Tracker Project - Standard Go Library </p>

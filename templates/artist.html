@@ -6,22 +6,27 @@
     <title>{{ .Name }} | Groupie Tracker</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
-<body class="artist-page">
+<body>
 
 <div class="container detail-container">
-    <a href="/" class="btn-back">← Retour à la liste</a>
+    <nav class="nav-back">
+        <a href="/" class="btn-back">← Retour à la liste</a>
+    </nav>
 
     <header class="artist-header">
         <h1>{{ .Name }}</h1>
-        <img src="{{ .Image }}" class="artist-image-large" alt="{{ .Name }}">
+        <div class="image-frame">
+            <img src="{{ .Image }}" class="artist-image-large" alt="{{ .Name }}">
+        </div>
     </header>
 
     <div class="grid-details">
         <section class="info-card">
-            <h3>À propos</h3>
-            <p><strong>Année de création :</strong> {{ .CreationDate }}</p>
-            <p><strong>Premier album :</strong> {{ .FirstAlbum }}</p>
-            
+            <h3>ℹ️ À propos</h3>
+            <div class="stats-group">
+                <p><strong>Création :</strong> {{ .CreationDate }}</p>
+                <p><strong>Premier album :</strong> {{ .FirstAlbum }}</p>
+            </div>
             <h4>Membres</h4>
             <ul class="members-list">
                 {{ range .Members }}
@@ -33,12 +38,17 @@
         <section class="info-card">
             <h3>📅 Tournée & Concerts</h3>
             <div class="relations-container">
-                <p class="hint">Consultez les dates et lieux de concerts ci-dessous.</p>
                 {{ if .Relations }}
-                    {{/* Exemple de boucle si tu structures tes données correctement en Go */}}
-                    <p>Données de concert disponibles via l'API.</p>
+                    <div class="scroll-area">
+                        {{ range $loc, $dates := .Relations.DatesLocations }}
+                        <div class="concert-item">
+                            <span class="city">{{ $loc }}</span>
+                            <span class="dates">{{ range $dates }}{{ . }} {{ end }}</span>
+                        </div>
+                        {{ end }}
+                    </div>
                 {{ else }}
-                    <p>Chargement des dates de concert...</p>
+                    <p class="no-data">Dates bientôt disponibles.</p>
                 {{ end }}
             </div>
         </section>
@@ -46,15 +56,14 @@
 
     {{ if .SpotifyID }}
     <section class="spotify-section">
-        <h3>🎧 Écouter sur Spotify</h3>
+        <h3>🎧 Les meilleurs titres</h3>
         <iframe
-          src="https://open.spotify.com/embed/artist/{{ .SpotifyID }}"
+          src="https://open.spotify.com/embed/artist/{{ .SpotifyID }}?utm_source=generator&theme=0"
           width="100%"
-          height="380"
+          height="152"
           frameborder="0"
-          allowtransparency="true"
           allow="encrypted-media"
-          style="border-radius: 12px;">
+          style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
         </iframe>
     </section>
     {{ end }}
