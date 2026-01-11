@@ -22,7 +22,6 @@ func main() {
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
-
 func GetArtists() ([]models.Artist, error) {
 	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
 	if err != nil {
@@ -35,7 +34,6 @@ func GetArtists() ([]models.Artist, error) {
 	if err != nil {
 		return nil, err
 	}
-
 
 	spotifyMap := map[string]string{
 		"Queen":      "1dfeR4HaWDbWqFHLkxsg1d",
@@ -50,12 +48,8 @@ func GetArtists() ([]models.Artist, error) {
 		}
 	}
 
-
 	return artists, nil
 }
-
-
-
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	artists, err := GetArtists()
