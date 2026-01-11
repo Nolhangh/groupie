@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ .Name }} | Groupie Tracker</title>
+    <title>Groupie Tracker | Home</title>
     <link rel="stylesheet" href="/static/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
@@ -32,6 +32,7 @@
         </header>
 
         <div class="details-grid">
+            
             <section class="card-glass">
                 <h2>ⓘ À propos</h2>
                 <div class="info-list">
@@ -55,12 +56,14 @@
                         <div class="concert-card">
                             <span class="location">{{ $loc }}</span>
                             <div class="dates-row">
-                                {{ range $dates }}<span class="date-tag">{{ . }}</span>{{ end }}
+                                {{ range $dates }}
+                                <span class="date-tag">{{ . }}</span>
+                                {{ end }}
                             </div>
                         </div>
                         {{ end }}
                     {{ else }}
-                        <p class="empty">Aucune date annoncée pour le moment.</p>
+                        <p class="empty-msg">Aucune date de concert trouvée.</p>
                     {{ end }}
                 </div>
             </section>
@@ -75,7 +78,10 @@
             <div class="player-container">
                 <iframe 
                     src="https://open.spotify.com/embed/artist/{{ .SpotifyID }}?utm_source=generator&theme=0" 
-                    width="100%" height="352" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                    width="100%" 
+                    height="152" 
+                    frameBorder="0" 
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
                     loading="lazy">
                 </iframe>
             </div>
