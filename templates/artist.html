@@ -26,17 +26,17 @@
                 <div class="hero-text">
                     <span class="badge">Artiste</span>
                     <h1>{{ .Name }}</h1>
-                    <p class="tagline">"Légende de la scène musicale"</p>
+                    <p class="tagline">Légende de la scène musicale</p>
                 </div>
             </div>
         </header>
 
         <div class="details-grid">
             <section class="card-glass">
-                <h2><i class="icon">ⓘ</i> À propos</h2>
+                <h2>ⓘ À propos</h2>
                 <div class="info-list">
-                    <div class="info-item"><strong>Création :</strong> {{ .CreationDate }}</div>
-                    <div class="info-item"><strong>Premier album :</strong> {{ .FirstAlbum }}</div>
+                    <p><strong>Création :</strong> {{ .CreationDate }}</p>
+                    <p><strong>Premier album :</strong> {{ .FirstAlbum }}</p>
                 </div>
                 <hr class="separator">
                 <h3>Membres :</h3>
@@ -48,9 +48,9 @@
             </section>
 
             <section class="card-glass">
-                <h2><i class="icon">📅</i> Tournée & Concerts</h2>
+                <h2>📅 Tournée & Concerts</h2>
                 <div class="concert-scroll">
-                    {{ if .Relations }}
+                    {{ if .Relations.DatesLocations }}
                         {{ range $loc, $dates := .Relations.DatesLocations }}
                         <div class="concert-card">
                             <span class="location">{{ $loc }}</span>
@@ -67,11 +67,16 @@
         </div>
 
         {{ if .SpotifyID }}
-        <section class="card-glass music-card">
-            <h2><i class="icon">🎵</i> Morceaux populaires</h2>
-            <div class="spotify-container">
-                <iframe src="https://open.spotify.com/embed/artist/{{ .SpotifyID }}?utm_source=generator&theme=0" 
-                    width="100%" height="152" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
+        <section class="card-glass music-section">
+            <div class="section-header">
+                <h2>🎵 Morceaux populaires</h2>
+                <span class="spotify-badge">Spotify Player</span>
+            </div>
+            <div class="player-container">
+                <iframe 
+                    src="https://open.spotify.com/embed/artist/{{ .SpotifyID }}?utm_source=generator&theme=0" 
+                    width="100%" height="352" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                    loading="lazy">
                 </iframe>
             </div>
         </section>
