@@ -1,56 +1,102 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #f4f4f4;
-    color: #252424;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Fond noir profond avec un léger dégradé pour le relief */
+    background: linear-gradient(135deg, #121212 0%, #1a1a1a 100%);
+    color: #e0e0e0; /* Texte gris très clair pour ne pas fatiguer l'œil */
 }
 
 h1 {
     text-align: center;
-    margin: 30px 0;
+    margin: 40px 0;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
 .container {
     width: 90%;
     max-width: 1200px;
     margin: auto;
+    /* Utilisation de grid pour que ce soit bien aligné comme sur ton image */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+    padding-bottom: 50px;
 }
 
 .card {
-    background: white;
-    border-radius: 8px;
+    /* Fond gris anthracite pour détacher les cartes du fond noir */
+    background: #1e1e1e; 
+    border-radius: 12px;
     padding: 20px;
-    margin: 20px 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    border: 1px solid #333; /* Bordure discrète */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    /* Lueur subtile au survol */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+    border-color: #0077cc; 
+}
+
+.card h2 {
+    color: #fff;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
 }
 
 .card img {
-    border-radius: 6px;
+    border-radius: 8px;
+    filter: grayscale(20%); /* Effet stylisé */
+    transition: filter 0.3s;
+    max-width: 100%;
+    height: auto;
+}
+
+.card:hover img {
+    filter: grayscale(0%);
 }
 
 a {
     display: inline-block;
-    margin-top: 10px;
+    margin-top: 20px;
     text-decoration: none;
     color: white;
     background-color: #0077cc;
-    padding: 8px 12px;
-    border-radius: 4px;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background 0.3s;
 }
 
 a:hover {
-    background-color: #005fa3;
+    background-color: #0099ff;
+    box-shadow: 0 0 10px rgba(0, 119, 204, 0.5);
 }
 
-.artist-image {
-    max-width: 300px;
+.image-link {
     display: block;
-    margin-bottom: 20px;
+    background: none;
+    padding: 0;
+    margin-bottom: 10px;
+    border: none;
 }
 
-iframe {
-  margin-top: 20px;
-  border-radius: 12px;
+.image-link:hover img {
+    transform: scale(1.05);
+    border-color: #0077cc;
+    transition: all 0.3s ease;
 }
 
+.artist-thumb {
+    width: 200px;
+    height: auto;
+    border-radius: 8px;
+    border: 2px solid #333;
+}

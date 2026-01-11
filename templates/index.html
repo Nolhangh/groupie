@@ -2,24 +2,42 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Groupie Tracker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groupie Tracker | Home</title>
     <link rel="stylesheet" href="/static/style.css">
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<h1>Groupie Tracker</h1>
+    <header>
+        <h1>Groupie Tracker</h1>
+    </header>
 
-<div class="container">
-    {{ range . }}
-        <div class="card">
-            <h2>{{ .Name }}</h2>
-            <img src="{{ .Image }}" width="200">
-            <br>
-            <a href="/artist?id={{ .ID }}">Voir l'artiste</a>
-        </div>
-    {{ end }}
-</div>
+    <main class="container">
+        {{ range . }}
+            <article class="card">
+                <a href="/artist?id={{ .ID }}" class="image-container">
+                    <img src="{{ .Image }}" alt="{{ .Name }}">
+                    <div class="overlay">
+                        <span>Voir la Bio</span>
+                    </div>
+                </a>
+
+                <div class="card-content">
+                    <h2>{{ .Name }}</h2>
+                    <div class="meta">
+                        <span class="tag">Depuis {{ .CreationDate }}</span>
+                        <span class="tag">1er Album: {{ .FirstAlbum }}</span>
+                    </div>
+                    <a href="/artist?id={{ .ID }}" class="btn-details">Concerts & Détails</a>
+                </div>
+            </article>
+        {{ end }}
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Groupie Tracker Project - Standard Go Library </p>
+    </footer>
 
 </body>
 </html>
