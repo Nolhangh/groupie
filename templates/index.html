@@ -5,32 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Groupie Tracker | Home</title>
     <link rel="stylesheet" href="/static/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="premium-dark">
 
-    <header>
-    <h1>Groupie Tracker</h1>
-</header>
+    <header class="main-header">
+        <h1>Groupie Tracker</h1>
+    </header>
 
-<div class="container">
-    {{ range . }}
-        <div class="card">
-            <h2>{{ .Name }}</h2>
-            <div class="image-wrapper">
-                <img src="{{ .Image }}" alt="{{ .Name }}">
+    <main class="container">
+        {{ range . }}
+        <div class="artist-card">
+            <div class="image-container">
+                <img src="{{ .Image }}" alt="{{ .Name }}" class="artist-img">
+                
+                <div class="overlay">
+                    <a href="/artist?id={{ .ID }}" class="hover-btn">Voir l'artiste</a>
+                </div>
             </div>
-            <div class="card-info">
-                <p>Depuis {{ .CreationDate }}</p>
-                <p>1er Album: {{ .FirstAlbum }}</p>
-            </div>
-            <a href="/artist?id={{ .ID }}">Voir l'artiste</a>
+            
+            <h2 class="artist-name">{{ .Name }}</h2>
         </div>
-    {{ end }}
-</div>
+        {{ end }}
+    </main>
 
     <footer>
-        <p>&copy; 2026 Groupie Tracker Project - Standard Go Library </p>
+        <p>&copy; 2026 Groupie Tracker Project - Standard Go Library</p>
     </footer>
 
 </body>

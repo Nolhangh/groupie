@@ -248,3 +248,69 @@ body.premium-dark {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
 }
+/* Grille 4x4 centrée */
+.container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.artist-card {
+    text-align: center;
+}
+
+/* Conteneur de l'image pour gérer le bouton */
+.image-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1/1; /* Garde les images carrées */
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: #1a1a1a;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+/* Le bouton caché par défaut */
+.hover-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #bc13fe; /* Ton violet néon */
+    color: white;
+    padding: 12px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+    white-space: nowrap;
+}
+
+/* Effets au survol de la carte */
+.image-container:hover img {
+    transform: scale(1.1);
+    filter: brightness(0.4); /* Assombrit l'image pour faire ressortir le bouton */
+}
+
+.image-container:hover .hover-btn {
+    opacity: 1;
+}
+
+.artist-name-minimal {
+    margin-top: 15px;
+    font-size: 1.1rem;
+    color: #fff;
+    font-weight: 600;
+}
