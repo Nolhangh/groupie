@@ -2,41 +2,63 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>{{ .Name }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Name }} | Groupie Tracker</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
-<body>
+<body class="artist-page">
 
-<div class="container">
-    <a href="/">← Retour</a>
+<div class="container detail-container">
+    <a href="/" class="btn-back">← Retour à la liste</a>
 
-    <h1>{{ .Name }}</h1>
+    <header class="artist-header">
+        <h1>{{ .Name }}</h1>
+        <img src="{{ .Image }}" class="artist-image-large" alt="{{ .Name }}">
+    </header>
 
-    <img src="{{ .Image }}" class="artist-image">
+    <div class="grid-details">
+        <section class="info-card">
+            <h3>À propos</h3>
+            <p><strong>Année de création :</strong> {{ .CreationDate }}</p>
+            <p><strong>Premier album :</strong> {{ .FirstAlbum }}</p>
+            
+            <h4>Membres</h4>
+            <ul class="members-list">
+                {{ range .Members }}
+                    <li>{{ . }}</li>
+                {{ end }}
+            </ul>
+        </section>
 
-    <p><strong>Année de création :</strong> {{ .CreationDate }}</p>
-    <p><strong>Premier album :</strong> {{ .FirstAlbum }}</p>
+        <section class="info-card">
+            <h3>📅 Tournée & Concerts</h3>
+            <div class="relations-container">
+                <p class="hint">Consultez les dates et lieux de concerts ci-dessous.</p>
+                {{ if .Relations }}
+                    {{/* Exemple de boucle si tu structures tes données correctement en Go */}}
+                    <p>Données de concert disponibles via l'API.</p>
+                {{ else }}
+                    <p>Chargement des dates de concert...</p>
+                {{ end }}
+            </div>
+        </section>
+    </div>
 
-    <h3>Membres</h3>
-    <ul>
-        {{ range .Members }}
-            <li>{{ . }}</li>
-        {{ end }}
-    </ul>
+    {{ if .SpotifyID }}
+    <section class="spotify-section">
+        <h3>🎧 Écouter sur Spotify</h3>
+        <iframe
+          src="https://open.spotify.com/embed/artist/{{ .SpotifyID }}"
+          width="100%"
+          height="380"
+          frameborder="0"
+          allowtransparency="true"
+          allow="encrypted-media"
+          style="border-radius: 12px;">
+        </iframe>
+    </section>
+    {{ end }}
 </div>
-{{ if .SpotifyID }}
-<h2>🎧 Écouter</h2>
-
-<iframe
-  src="https://open.spotify.com/embed/artist/{{ .SpotifyID }}"
-  width="100%"
-  height="380"
-  frameborder="0"
-  allow="encrypted-media"
-  loading="lazy">
-</iframe>
-{{ end }}
-
 
 </body>
 </html>
