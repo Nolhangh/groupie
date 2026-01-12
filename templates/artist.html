@@ -34,7 +34,7 @@
         <div class="details-grid">
             
             <section class="card-glass">
-                <h2>ⓘ À propos</h2>
+                <h2>À propos</h2>
                 <div class="info-list">
                     <p><strong>Création :</strong> {{ .CreationDate }}</p>
                     <p><strong>Premier album :</strong> {{ .FirstAlbum }}</p>
@@ -49,7 +49,7 @@
             </section>
 
             <section class="card-glass">
-                <h2>📅 Tournée & Concerts</h2>
+                <h2>Tournée & Concerts</h2>
                 <div class="concert-scroll">
                     {{ if .Relations.DatesLocations }}
                         {{ range $loc, $dates := .Relations.DatesLocations }}
@@ -72,7 +72,7 @@
         {{ if .SpotifyID }}
         <section class="card-glass music-section">
             <div class="section-header">
-                <h2>🎵 Morceaux populaires</h2>
+                <h2> Morceaux populaires</h2>
                 <span class="spotify-badge">Spotify Player</span>
             </div>
             <div class="player-container">
